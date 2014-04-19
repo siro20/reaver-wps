@@ -45,6 +45,10 @@ int sql_init(void)
 		{
 			retval = 1;
 		}
+		if( !retval )
+		{
+			fprintf(stderr, "ERROR: Can't open database: %s\n", sqlite3_errmsg(db));
+		}
 	}
 
 	return retval;
