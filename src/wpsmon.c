@@ -323,7 +323,7 @@ void parse_wps_settings(const u_char *packet, struct pcap_pkthdr *header, char *
 				wps_parsed = parse_wps_parameters(packet, header->len, wps);
 			}
 	
-			if(!is_done(bssid) && (get_channel() == channel || source == PCAP_FILE))
+			if(!is_done(bssid) && (get_channel() == channel || source == PCAP_FILE || !get_channel()))
 			{
 				if(frame_header->fc.sub_type == SUBTYPE_BEACON && 
 				   mode == SCAN && 
