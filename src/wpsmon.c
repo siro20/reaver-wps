@@ -262,13 +262,14 @@ void monitor(char *bssid, int passive, int source, int channel, int mode)
 		header_printed = 1;
 	}
 
-	while((packet = next_packet(&header)))
+	while(1)
 	{
-		parse_wps_settings(packet, &header, bssid, passive, mode, source);
-		memset((void *) packet, 0, header.len);
+		packet = next_packet(&header);
+		if(packet){
+			parse_wps_settings(packet, &header, bssid, passive, mode, source);
+			memset((void *) packet, 0, header.len);
+		}
 	}
-
-	return;
 }
 
 void parse_wps_settings(const u_char *packet, struct pcap_pkthdr *header, char *target, int passive, int mode, int source)
